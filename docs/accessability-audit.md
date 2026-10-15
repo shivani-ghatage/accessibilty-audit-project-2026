@@ -47,6 +47,18 @@ Lighthouse Accessibility Audit
 - Result: The website received an accessibility score of 85 out of 100.
 - Evidence: Lighthouse audit screenshot uploaded to the repository.
 
+
+Keyboard Navigation Test
+
+- Testing Method: Keyboard-only navigation.
+- Keys Used: Tab, Shift + Tab, and Enter.
+- Result: The website's links and interactive elements tested were accessible using the keyboard.
+- Observation: Keyboard navigation was tested, and no navigation problems were observed during this check.
+- Status: Basic keyboard navigation test completed.
+
+Recommendation
+
+Continue testing keyboard focus visibility, logical focus order, and access to all interactive elements to identify any remaining accessibility issues.
 Next Steps
 
 - Review Lighthouse recommendations to identify accessibility issues.
