@@ -39,3 +39,16 @@ Issue 5: Accessibility Audit Findings
 3. Conclusion
 
 Improving website accessibility helps more people navigate and understand the website. The suggested fixes should be verified through testing before the issues are marked as resolved.
+
+Lighthouse Accessibility Audit
+
+- Accessibility Score: 85/100
+- Testing Tool: Google Lighthouse
+- Result: The website received an accessibility score of 85 out of 100.
+- Evidence: Lighthouse audit screenshot uploaded to the repository.
+
+Next Steps
+
+- Review Lighthouse recommendations to identify accessibility issues.
+- Test website navigation using only the keyboard.
+- Document verified issues and suggest suitable improvements.
