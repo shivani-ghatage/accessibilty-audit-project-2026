@@ -64,3 +64,23 @@ Next Steps
 - Review Lighthouse recommendations to identify accessibility issues.
 - Test website navigation using only the keyboard.
 - Document verified issues and suggest suitable improvements.
+
+Issue 1: Incorrect ARIA Role Containment
+
+Priority: Medium — incorrect ARIA role relationships may affect how assistive technologies interpret the page structure.
+
+Issue 2: Focusable Descendants Within an "aria-hidden="true"" Element
+
+Priority: High — keyboard users may focus on interactive content that is hidden from screen readers.
+
+Issue 3: Insufficient Colour Contrast
+
+Priority: Medium — insufficient contrast may make text difficult for some users to read.
+
+Issue 4: List Items Missing the Required Parent Element
+
+Priority: Medium — incorrect list structure may prevent assistive technologies from interpreting lists properly.
+
+Issue 5: Document Does Not Have a Main Landmark
+
+Priority: Medium — without a main landmark, screen-reader users may find it harder to navigate directly to the primary content.
