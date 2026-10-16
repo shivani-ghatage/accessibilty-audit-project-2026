@@ -3,14 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessibility Project</title>
+    <title>Accessible Admin Dashboard</title>
 </head>
+
 <body>
     <header>
-        <h1>Accessibility Audit Project</h1>
+        <h1>Admin Dashboard</h1>
+
+        <nav aria-label="Main navigation">
+            <a href="#home">Home</a>
+            <a href="#users">Users</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
-    <main>
-        <p>Welcome to my accessibility project.</p>
+
+    <aside aria-label="Sidebar">
+        <h2>Quick Links</h2>
+        <ul>
+            <li><a href="#home">Dashboard</a></li>
+            <li><a href="#users">User Management</a></li>
+            <li><a href="#contact">Contact Form</a></li>
+        </ul>
+    </aside>
+
+    <main id="home">
+        <section>
+            <h2>Welcome</h2>
+            <p>Welcome to the accessible admin dashboard.</p>
+        </section>
+
+        <section id="users">
+            <h2>User Information</h2>
+
+            <table>
+                <caption>Registered Users</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Shivani</td>
+                        <td>Student</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Rahul</td>
+                        <td>Developer</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Form</h2>
+
+            <form action="#contact" method="get">
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" name="email" required>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>More Information</h2>
+            <article>
+                <h3>About This Project</h3>
+                <p>This project demonstrates semantic HTML5
+                   and accessible web components.</p>
+            </article>
+        </section>
+
+        <section>
+            <h2>Help</h2>
+            <button type="button" id="openDialog">
+                Open Help Dialog
+            </button>
+
+            <dialog id="helpDialog" aria-labelledby="dialogTitle">
+                <h2 id="dialogTitle">Help Information</h2>
+                <p>Use the navigation links to explore this dashboard.</p>
+                <button type="button" id="closeDialog">
+                    Close
+                </button>
+            </dialog>
+        </section>
     </main>
+
+    <footer>
+        <p>&copy; 2026 Accessible Admin Dashboard</p>
+    </footer>
+
+    <script>
+        const dialog = document.getElementById("helpDialog");
+
+        document.getElementById("openDialog").addEventListener(
+            "click", () => dialog.showModal()
+        );
+
+        document.getElementById("closeDialog").addEventListener(
+            "click", () => dialog.close()
+        );
+    </script>
 </body>
 </html>
