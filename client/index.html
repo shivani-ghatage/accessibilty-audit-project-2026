@@ -3,116 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accessible Admin Dashboard</title>
-    <link rel="stylesheet" href="style.css">
+
+    <meta name="description"
+          content="Accessibility Audit Project 2026 - Identifying website accessibility issues and recommending practical solutions.">
+
+    <title>Accessibility Audit Project 2026</title>
+
+    <style>
+        :root {
+            --primary: #173b67;
+            --secondary: #245b9e;
+            --background: #f4f7fb;
+            --text: #202b3c;
+            --white: #ffffff;
+            --border: #dce4ef;
+            --success: #17663a;
+            --warning: #8a4b08;
+            --danger: #a32121;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behaviour: smooth;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        a {
+            color: #174f91;
+        }
+
+        a:focus-visible,
+        button:focus-visible {
+            outline: 3px solid #f0a202;
+            outline-offset: 4px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: -100px;
+            left: 10px;
+            padding: 12px 18px;
+            background: white;
+            color: black;
+            z-index: 1000;
+        }
+
+        .skip-link:focus {
+            top: 10px;
+        }
+
+        header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 22px 6%;
+        }
+
+        .header-content {
+            max-width: 1150px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-size: 1.3rem;
+            font-weight: bold;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            max-width: 1150px;
+            margin: auto;
+            padding: 35px 20px 60px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #173b67, #3477bd);
+            color: white;
+            padding: 55px 35px;
+            border-radius: 16px;
+            margin-bottom: 30px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            line-height: 1.2;
+            margin-bottom: 18px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            font-size: 1.08rem;
+            margin-bottom: 24px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            border-radius: 7px;
+            background: white;
+            color: var(--primary);
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        section {
+            margin-top: 38px;
+            scroll-margin-top: 20px;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 16px;
+        }
+
+        .section-intro {
+            margin-bottom: 20px;
+            max-width: 850px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 18px;
+        }
+
+        .stat-card,
+        .card,
+        .issue-card {
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 22px;
+            box-shadow: 0 3px 12px rgba(20, 40, 70, 0.05);
+        }
+
+        .stat-card strong {
+            display: block;
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+        }
+
+        .card h3,
+        .issue-card h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .issue-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 18px;
+        }
+
+        .priority {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .high {
+            color: var(--danger);
+            background: #fde8e8;
+        }
+
+        .medium {
+            color: var(--warning);
+            background: #fff1d6;
+        }
+
+        .low {
+            color: var(--success);
+            background: #e0f5e8;
+        }
+
+        .issue-card p {
+            margin-top: 8px;
+        }
+
+        .issue-card p strong {
+            color: var(--primary);
+        }
+
+        .checklist {
+            padding-left: 25px;
+        }
+
+        .checklist li {
+            margin-bottom: 12px;
+        }
+
+        .notice {
+            border-left: 5px solid var(--secondary);
+            padding: 18px;
+            background: #eaf2fc;
+            border-radius: 6px;
+        }
+
+        footer {
+            background: #102945;
+            color: white;
+            text-align: center;
+            padding: 25px 20px;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 20px;
+            }
+
+            .header-content {
+                align-items: flex-start;
+            }
+
+            nav {
+                gap: 12px;
+            }
+
+            main {
+                padding: 22px 14px 40px;
+            }
+
+            .hero {
+                padding: 35px 22px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
-    <header>
-        <h1>Admin Dashboard</h1>
 
-       <nav aria-label="Main navigation">
-    <a href="index.html" aria-current="page">Home</a>
-    <a href="users.html">Users</a>
-    <a href="#contact">Contact</a>
-</nav>
+    <a class="skip-link" href="#main-content">
+        Skip to main content
+    </a>
+
+    <header>
+        <div class="header-content">
+            <div class="brand">Accessibility Audit 2026</div>
+
+            <nav aria-label="Main navigation">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#issues">Audit Issues</a>
+                <a href="#testing">Testing</a>
+                <a href="#recommendations">Solutions</a>
+            </nav>
+        </div>
     </header>
 
-    <aside aria-label="Sidebar">
-        <h2>Quick Links</h2>
-        <ul>
-            <li><a href="#home">Dashboard</a></li>
-            <li><a href="#users">User Management</a></li>
-            <li><a href="#contact">Contact Form</a></li>
-        </ul>
-    </aside>
+    <main id="main-content">
 
-    <main id="home">
-        <section>
-            <h2>Welcome</h2>
-            <p>Welcome to the accessible admin dashboard.</p>
+        <section class="hero" id="home">
+            <h1>Accessibility Audit Project 2026</h1>
+
+            <p>
+                Building a more accessible web by identifying usability
+                barriers, documenting accessibility issues, and recommending
+                practical improvements for everyone.
+            </p>
+
+            <a class="button" href="#issues">
+                Explore Audit Findings
+            </a>
         </section>
 
-        <section id="users">
-            <h2>User Information</h2>
+        <section id="about">
+            <h2>About This Project</h2>
 
-            <table>
-                <caption>Registered Users</caption>
-                <thead>
-                    <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Role</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Shivani</td>
-                        <td>Student</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Rahul</td>
-                        <td>Developer</td>
-                    </tr>
-                </tbody>
-            </table>
+            <p class="section-intro">
+                This project focuses on website accessibility auditing.
+                It aims to identify barriers that may prevent people,
+                including people with disabilities, from accessing and
+                using digital services effectively.
+            </p>
+
+            <div class="stats">
+                <article class="stat-card">
+                    <strong>05</strong>
+                    <span>Audit issues documented</span>
+                </article>
+
+                <article class="stat-card">
+                    <strong>03</strong>
+                    <span>Priority levels</span>
+                </article>
+
+                <article class="stat-card">
+                    <strong>01</strong>
+                    <span>Accessibility improvement goal</span>
+                </article>
+            </div>
         </section>
 
-        <section id="contact">
-            <h2>Contact Form</h2>
+        <section id="objectives">
+            <h2>Project Objectives</h2>
 
-            <form action="#contact" method="get">
-                <label for="name">Full Name:</label>
-                <input type="text" id="name" name="name" required>
+            <div class="grid">
+                <article class="card">
+                    <h3>Identify Barriers</h3>
+                    <p>
+                        Find potential accessibility problems in website
+                        structure, navigation, text, and interactive elements.
+                    </p>
+                </article>
 
-                <label for="email">Email Address:</label>
-                <input type="email" id="email" name="email" required>
+                <article class="card">
+                    <h3>Document Evidence</h3>
+                    <p>
+                        Record audit findings and supporting evidence so
+                        issues can be understood and investigated.
+                    </p>
+                </article>
 
-                <button type="submit">Submit</button>
-            </form>
+                <article class="card">
+                    <h3>Recommend Solutions</h3>
+                    <p>
+                        Suggest practical improvements that help make
+                        websites easier to use for more people.
+                    </p>
+                </article>
+            </div>
         </section>
 
-        <section>
-            <h2>More Information</h2>
-            <article>
-                <h3>About This Project</h3>
-                <p>This project demonstrates semantic HTML5
-                   and accessible web components.</p>
-            </article>
+        <section id="issues">
+            <h2>Accessibility Audit Findings</h2>
+
+            <p class="section-intro">
+                The following are example findings for an accessibility
+                audit. Replace them with your verified findings and evidence
+                from the website you tested.
+            </p>
+
+            <div class="issue-list">
+
+                <article class="issue-card">
+                    <span class="priority high">High Priority</span>
+                    <h3>1. Keyboard Navigation</h3>
+                    <p>
+                        <strong>Potential issue:</strong>
+                        Some interactive elements may not be accessible
+                        using only a keyboard.
+                    </p>
+                    <p>
+                        <strong>Recommended solution:</strong>
+                        Ensure interactive elements can receive keyboard
+                        focus and be operated using the keyboard.
+                    </p>
+                </article>
+
+                <article class="issue-card">
+                    <span class="priority high">High Priority</span>
+                    <h3>2. Form Labels</h3>
+                    <p>
+                        <strong>Potential issue:</strong>
+                        Input fields may lack clear, programmatically
+                        associated labels.
+                    </p>
+                    <p>
+                        <strong>Recommended solution:</strong>
+                        Add descriptive labels associated with their
+                        corresponding form controls.
+                    </p>
+                </article>
+
+                <article class="issue-card">
+                    <span class="priority high">High Priority</span>
+                    <h3>3. Image Alternatives</h3>
+                    <p>
+                        <strong>Potential issue:</strong>
+                        Meaningful images may not have appropriate
+                        alternative text.
+                    </p>
+                    <p>
+                        <strong>Recommended solution:</strong>
+                        Add concise, meaningful alt text to informative
+                        images and appropriate alternatives to image links.
+                    </p>
+                </article>
+
+                <article class="issue-card">
+                    <span class="priority medium">Medium Priority</span>
+                    <h3>4. Colour Contrast</h3>
+                    <p>
+                        <strong>Potential issue:</strong>
+                        Some text may not have sufficient contrast
+                        against its background.
+                    </p>
+                    <p>
+                        <strong>Recommended solution:</strong>
+                        Check colour contrast and adjust text or
+                        background colours where necessary.
+                    </p>
+                </article>
+
+                <article class="issue-card">
+                    <span class="priority medium">Medium Priority</span>
+                    <h3>5. Heading Structure</h3>
+                    <p>
+                        <strong>Potential issue:</strong>
+                        Headings may not follow a logical hierarchy.
+                    </p>
+                    <p>
+                        <strong>Recommended solution:</strong>
+                        Organise headings to communicate the page structure
+                        clearly to users and assistive technologies.
+                    </p>
+                </article>
+
+            </div>
         </section>
 
-        <section>
-            <h2>Help</h2>
-            <button type="button" id="openDialog">
-                Open Help Dialog
-            </button>
+        <section id="testing">
+            <h2>Accessibility Testing Methods</h2>
 
-            <dialog id="helpDialog" aria-labelledby="dialogTitle">
-                <h2 id="dialogTitle">Help Information</h2>
-                <p>Use the navigation links to explore this dashboard.</p>
-                <button type="button" id="closeDialog">
-                    Close
-                </button>
-            </dialog>
+            <div class="grid">
+                <article class="card">
+                    <h3>Automated Testing</h3>
+                    <p>
+                        Use tools such as Lighthouse to identify potential
+                        accessibility issues and review the reported results.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Keyboard Testing</h3>
+                    <p>
+                        Navigate the website using Tab, Shift + Tab,
+                        Enter, and Space wherever appropriate.
+                    </p>
+                </article>
+
+                <article class="card">
+                    <h3>Manual Review</h3>
+                    <p>
+                        Check headings, form labels, image alternatives,
+                        focus indicators, and text contrast.
+                    </p>
+                </article>
+            </div>
         </section>
+
+        <section id="recommendations">
+            <h2>Recommendations</h2>
+
+            <div class="card">
+                <ol class="checklist">
+                    <li>Fix verified high-priority accessibility issues first.</li>
+                    <li>Ensure important functions work with keyboard navigation.</li>
+                    <li>Provide meaningful labels and image alternatives.</li>
+                    <li>Review colour contrast and page heading structure.</li>
+                    <li>Retest the website after implementing improvements.</li>
+                    <li>Document evidence, fixes, and remaining issues.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="standards">
+            <h2>Accessibility Standards</h2>
+
+            <div class="notice">
+                This project uses the Web Content Accessibility Guidelines
+                (WCAG) as a reference for accessibility evaluation.
+                Findings should be checked against the applicable WCAG
+                criteria before being reported as confirmed violations.
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <p>&copy; 2026 Accessible Admin Dashboard</p>
+        <p><strong>Accessibility Audit Project 2026</strong></p>
+        <p>Designed to support a more inclusive digital experience.</p>
     </footer>
 
-    <script>
-        const dialog = document.getElementById("helpDialog");
-
-        document.getElementById("openDialog").addEventListener(
-            "click", () => dialog.showModal()
-        );
-
-        document.getElementById("closeDialog").addEventListener(
-            "click", () => dialog.close()
-        );
-    </script>
 </body>
 </html>
